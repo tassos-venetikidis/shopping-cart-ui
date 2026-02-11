@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { CartContext } from "../contexts/CartContext.jsx";
 
 function Header() {
-  const { cart } = useContext(CartContext);
+  const { cart, removeFromCart, clearCart } = useContext(CartContext);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const itemCount = cart.reduce((acc, curr) => acc + curr.quantity, 0);
@@ -46,6 +46,12 @@ function Header() {
                             {item.quantity} x ${item.price}
                           </p>
                         </div>
+                        <button
+                          onClick={() => removeFromCart(item)}
+                          className="text-sm text-red-500 hover:underline cursor-pointer"
+                        >
+                          Remove
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -53,6 +59,12 @@ function Header() {
                     <span>Total:</span>
                     <span>${total}</span>
                   </div>
+                  <button
+                    onClick={clearCart}
+                    className="mt-3 w-full bg-red-500 text-white py-1 rounded transition hover:bg-red-600"
+                  >
+                    Clear Cart
+                  </button>
                 </>
               )}
             </div>

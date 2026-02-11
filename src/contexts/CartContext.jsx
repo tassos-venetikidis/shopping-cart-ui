@@ -35,8 +35,18 @@ function CartProvider({ children }) {
     });
   }
 
+  function removeFromCart(product) {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== product.id));
+  }
+
+  function clearCart() {
+    setCart([]);
+  }
+
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );
